@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard - Forenyx</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <h2>Incident Dashboard</h2>
+  <button onclick="loadIncidents()">Refresh</button>
+  <ul id="list"></ul>
+</div>
+
+<script>
+async function loadIncidents(){
+  const res = await fetch("http://localhost:5000/api/incidents");
+  const incidents = await res.json();
+  list.innerHTML = incidents.map(i => `<li>${i.name} - ${i.severity}</li>`).join("");
+}
+
+loadIncidents();
+</script>
+</body>
+</html>
